@@ -24,5 +24,8 @@ def create_app(test_config=None):
     @app.route("/")
     def indexPage():
         return "Blog posts!"
+    
+    from . import db
+    db.init_app(app)
 
     return app
