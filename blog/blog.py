@@ -80,6 +80,7 @@ def update(id):
 
 @blog_blueprint.route('/delete/<int:id>', methods=('POST',))
 def delete(id):
+    print(id)
     get_post_by_id(id)
     db = get_db()
     db.execute('DELETE FROM post WHERE id= ?', (id))
