@@ -1,15 +1,12 @@
 import functools
-
 from flask import (Blueprint, flash, g, redirect, render_template, request, session, url_for)
-
 from werkzeug.security import check_password_hash, generate_password_hash
-
 from blog.db import get_db
 
 blueprint = Blueprint('auth', __name__, url_prefix="/auth")
 
 @blueprint.route('/register', methods=('GET', 'POST'))
-def register_user():
+def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -23,7 +20,7 @@ def register_user():
         if error is None:
             db = get_db()
             try:
-                db.execute("INSERT INTO user (usernama, password) VALUES(?, ?),",
+                db.execute("INSERT INTO user (username, password) VALUES(?, ?)",
                            (username, generate_password_hash(password)),)
                 db.commit()
             except db.IntegrityError:
@@ -33,11 +30,11 @@ def register_user():
 
         flash(error)
 
-    return render_template('auth/signUp.html')
+    return render_template('auth/register.html')
 
 
 @blueprint.route('/login', methods=('GET', 'POST'))
-def login_user():
+def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -49,7 +46,7 @@ def login_user():
             error = "Username is required"
 
         db = get_db()
-        user = db.execute("SELECT * FROM user WHERE username=?", (username),).fetchone()
+        user = db.execute("SELECT * FROM user WHERE username=?", (username)).fetchone()
 
         if user is None:
             error = f"The username {username} is not found."
@@ -66,7 +63,7 @@ def login_user():
     return render_template('auth/login.html')
 
 @blueprint.route('logout')
-def logout_user():
+def logout():
     session.clear()
     return url_for('index')
 
