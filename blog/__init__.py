@@ -1,3 +1,5 @@
+# init.py file for seeting up the app and gettting it running.
+
 import os
 from flask import Flask
 
@@ -25,9 +27,11 @@ def create_app(test_config=None):
     def indexPage():
         return "Blog posts!"
     
+    # for database
     from . import db
     db.init_app(app)
 
+    # for endpoints 
     from . import auth
     app.register_blueprint(auth.blueprint)
 
