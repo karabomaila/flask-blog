@@ -16,10 +16,10 @@ def index():
 
     return render_template('blog/index.html', posts=posts)
 
-@blog_blueprint.route('/create', methods=('Get', 'Post'))
+@blog_blueprint.route('/create', methods=('GET', 'POST'))
 @login_required
 def create():
-    if request.method == 'Post':
+    if request.method == 'POST':
         title = request.form['title']
         body = request.form['body']
         error = None
@@ -53,11 +53,11 @@ def get_post_by_id(id, check_author=True):
 
     return post
 
-@blog_blueprint.route('/update/<int:id>', methods=('Get', 'Post'))
+@blog_blueprint.route('/update/<int:id>', methods=('GET', 'POST'))
 def update(id):
     post = get_post_by_id(id)
 
-    if request.method == 'Post':
+    if request.method == 'POST':
         title = request.form['title']
         body = request.form['body']
         error = None
@@ -78,7 +78,7 @@ def update(id):
 
     return render_template('blog/update.html', post=post)
 
-@blog_blueprint.route('/delete/<int:id>', methods=('Post'))
+@blog_blueprint.route('/delete/<int:id>', methods=('POST',))
 def delete(id):
     get_post_by_id(id)
     db = get_db()
