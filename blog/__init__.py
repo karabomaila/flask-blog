@@ -22,10 +22,6 @@ def create_app(test_config=None):
         os.makedirs(app.instance_path)
     except OSError:
         pass
-
-    @app.route("/")
-    def indexPage():
-        return "Blog posts!"
     
     # for database
     from . import db
