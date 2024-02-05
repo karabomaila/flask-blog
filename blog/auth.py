@@ -46,7 +46,7 @@ def login():
             error = "Username is required"
 
         db = get_db()
-        user = db.execute("SELECT * FROM user WHERE username=?", (username)).fetchone()
+        user = db.execute("SELECT * FROM user WHERE username=?", (username,)).fetchone()
 
         if user is None:
             error = f"The username {username} is not found."

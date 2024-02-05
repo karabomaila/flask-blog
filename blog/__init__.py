@@ -8,7 +8,7 @@ def create_app(test_config=None):
 
     # database set up
     app.config.from_mapping(
-        SECRETE_KEY='Dev',
+        SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'blog.sqlite')
     )
 
