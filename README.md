@@ -1,6 +1,6 @@
 # Blog posts
 
-# Install
+## Install
 - pip install -e .
 
 Init commands

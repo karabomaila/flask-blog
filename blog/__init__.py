@@ -1,7 +1,7 @@
 # init.py file for seeting up the app and gettting it running.
 
 import os
-from flask import Flask
+from flask import Flask, render_template
 
 def create_app(test_config=None):
     app  = Flask(__name__, instance_relative_config=True) # new flask app instance
@@ -35,5 +35,9 @@ def create_app(test_config=None):
     app.register_blueprint(blog.blog_blueprint)
 
     app.add_url_rule('/', endpoint='index')
+
+    app.errorhandler(404)
+    def error_page(error):
+        return render_template('auth/error.html'), 404
 
     return app

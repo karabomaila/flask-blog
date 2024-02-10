@@ -62,10 +62,14 @@ def login():
         flash(error)
     return render_template('auth/login.html')
 
-@blueprint.route('logout')
+@blueprint.route('/logout')
 def logout():
     session.clear()
     return url_for('index')
+"""
+@blueprint.errorhandler(404)
+def error(error):
+    return render_template('auth/error.html'), 404"""
 
 @blueprint.before_app_request
 def load_logged_in_user():

@@ -54,6 +54,7 @@ def get_post_by_id(id, check_author=True):
     return post
 
 @blog_blueprint.route('/update/<int:id>', methods=('GET', 'POST'))
+@login_required
 def update(id):
     post = get_post_by_id(id)
 
@@ -79,9 +80,10 @@ def update(id):
     return render_template('blog/update.html', post=post)
 
 @blog_blueprint.route('/delete/<int:id>', methods=('POST',))
+@login_required
 def delete(id):
-    print(id)
     get_post_by_id(id)
+    
     db = get_db()
     db.execute('DELETE FROM post WHERE id= ?', (id,))
     db.commit()
