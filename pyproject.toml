@@ -1,7 +1,8 @@
 [project]
-name = blog
-version = 1.0.0
-description = blog posts project
+name = "blog"
+version = "1.0.0"
+description = "blog posts project"
+requires-python = ">=3.11"
 dependencies = [
     "flask",
 ]
