@@ -65,12 +65,14 @@ def login():
 @blueprint.route('/logout')
 def logout():
     session.clear()
-    return url_for('index')
+    return redirect(url_for('index'))
+
 """
 @blueprint.errorhandler(404)
 def error(error):
     return render_template('auth/error.html'), 404"""
 
+# adds the function that runs before each view function.
 @blueprint.before_app_request
 def load_logged_in_user():
     user_id = session.get('user_id')
@@ -80,7 +82,7 @@ def load_logged_in_user():
     else:
         g.user = get_db().execute('SELECT * FROM user WHERE id = ?', (user_id,)).fetchone()
 
-# authenticate the other views. 
+# authenticate the other views and requre login of some endpoints. 
 def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
