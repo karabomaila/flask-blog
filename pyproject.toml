@@ -1,6 +1,6 @@
 [project]
 name = "blog"
-version = "1.0.0"
+version = "1.0.1"
 description = "blog posts project"
 requires-python = ">=3.11"
 dependencies = [
