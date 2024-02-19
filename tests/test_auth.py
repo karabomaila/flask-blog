@@ -39,7 +39,7 @@ def test_login(client, auth):
         ('test', 'a', b'Incorrect password.'),
 ))
 def test_login_validate_input(client, username, password, message):
-    response = client.post('/auth/register', data={'username': username, 'password': password})
+    response = client.post('/auth/login', data={'username': username, 'password': password})
 
     assert message in response.data
 

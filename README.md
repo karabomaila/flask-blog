@@ -15,4 +15,5 @@ Init commands
 ## Code coverage
 - coverage run -m pytest
 - coverage report
+- coverage html
 - access the report in the browser at ~/flask-blog/htmlcov/index.html
