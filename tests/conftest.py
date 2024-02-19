@@ -1,3 +1,5 @@
+# contains set up functions for tests
+
 import os
 import tempfile
 
@@ -5,6 +7,7 @@ import pytest
 from blog import create_app
 from blog.db import get_db, init_db
 
+# read the SQL data
 with open(os.path.join(os.path.dirname(__name__), 'data.sql'), 'rb') as f:
     _data_sql = f.read().decode('utf8')
 
@@ -34,7 +37,7 @@ def client(app):
 def runner(app):
     return app.test_cli_runner()
 
-
+# used for login
 class AuthActions(object):
     def __int__(self, client):
         self._client = client
