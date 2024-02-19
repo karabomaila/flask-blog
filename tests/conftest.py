@@ -4,11 +4,11 @@ import os
 import tempfile
 
 import pytest
-from blog import create_app
 from blog.db import get_db, init_db
+from blog import create_app
 
 # read the SQL data
-with open(os.path.join(os.path.dirname(__name__), 'data.sql'), 'rb') as f:
+with open(os.path.join(os.path.dirname(__file__), 'data.sql'), 'rb') as f:
     _data_sql = f.read().decode('utf8')
 
 @pytest.fixture
