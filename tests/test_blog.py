@@ -18,11 +18,11 @@ def test_index(client ,auth):
 
 @pytest.mark.parametrize('path', (
     ('/create'),
-    ('/update'),
-    ('/delete'),
+    ('/update/1'),
+    ('/delete/1'),
 ))
 def test_login_required(client, path):
-    response = client.get(path)
+    response = client.post(path)
 
     assert response.headers['Location'] == '/auth/login'
 
